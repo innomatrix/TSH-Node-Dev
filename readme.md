@@ -22,14 +22,15 @@ In my opinion following changes shall be done to the source:
 1. Creating `.gitignore` with common values for NodeJS development
 2. Separation of concerns / new files structure witch an architecture as follows:
 
-
+```bash
     .
-    ├── /helpers					# utils | error handler
-    ├── /models						# model(s) (entity definition, repository actions, entity tests)
-    ├── /routes						# api routes
-    ├── /tests						# tests
+    ├── /helpers                   # utils | error handler
+    ├── /models                    # model(s) (entity definition, repository actions, entity tests)
+    ├── /routes                    # api routes
+    ├── /tests                     # tests
     ├── index.js
     └── readme.md
+```
 
 3. Proper APP configuration - fixing initial config (express + supertest/jest)
 4. Adding features and further development (validation +  tests amendment, Not Found Page, centralized error handling)
