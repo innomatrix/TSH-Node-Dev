@@ -1,7 +1,14 @@
-var Post = require('./post/post.model');
+var Post = require('./models/post/post.model');
 var express = require('express');
-var app = express();
+
+const port = 3000;
+
+const app = express();
+app.use(express.json());
+
 var posts = [];
+
+app.listen(port, () => console.log(`TSH app listening on port ${port}! api@ http://localhost:3000/`));
 
 var addPost = function(post) {
   posts.push(post);
@@ -99,5 +106,12 @@ app.delete('/posts/:postId', function(req, res) {
         .json({ error });
     })
 });
+
+app.use(function (req, res) {
+  res
+    .status(404)
+    .json("Page Not Found");
+});
+
 
 module.exports = app;
