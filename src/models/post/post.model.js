@@ -1,4 +1,5 @@
 const { v4 } = require('uuid');
+const { handleError, ErrorHandler } = require('../../helpers/error');
 
 class Post {
   constructor(id, title, content) {
@@ -7,8 +8,18 @@ class Post {
     this._content = content;
   }
 
-  static fromRequestBody(body) {
-    return new this(v4(), body.title, body.content);
+  static validatePost(post) {
+      const { title, content } = post
+      if (!title || !content) {
+        throw new ErrorHandler(409, 'Missing required title or content field(s)')
+      }
+      if (title.length < 6) {
+        throw new ErrorHandler(409, 'Title shall be minimum 6 chars long')
+      }
+      if (content.length < 20) {
+        throw new ErrorHandler(409, 'Content shall be minimum 20 chars long')
+      }          
+      return new this(v4(), title, content);
   }
 
   get id() {

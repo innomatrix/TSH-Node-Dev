@@ -1,12 +1,14 @@
 var express = require('express'),
     router = express.Router();
 
+const { ErrorHandler } = require('../helpers/error');
+
 const { addPost, getPostById, removePost, getPosts } = require('../models/post/post.actions');
 const Post = require('../models/post/post.model');
 
 router
   // Add a binding to handle '/posts'
-  .get('/', function (req, res) {
+  .get('/', function (req, res, next) {
     getPosts()
       .then((posts) => {
         res
